@@ -66,13 +66,6 @@ var consent = {
   };
 
 
-
-var welcome = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: "Welcome to the experiment. Press any key to begin."
-};
-
-
 var instructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
@@ -82,15 +75,29 @@ var instructions = {
 
 // timeline.push(welcome);
 timeline.push(consent);
+texturePairs = {0:['sand','paper'], 1:['rubber','paper'],2:['rubber','felt'],3:['sand','felt'],
+                    4:['sand','rubber'],5:['felt','paper']};
+concepts = ['lion','badger'];
+
+imPaths = []
+  for(var i=0;i<Object.keys(texturePairs).length;i++){
+    imPaths.push(`img/${texturePairs[i][0]}_${texturePairs[i][1]}.png`)
+    imPaths.push(`img/${texturePairs[i][1]}_${texturePairs[i][0]}.png`)
+  }
+  var preload = {
+    type: jsPsychPreload,
+    images: imPaths
+  }
+  timeline.push(preload);
+
+
+
 timeline.push({
   type: jsPsychFullscreen,
   fullscreen_mode: true,
 })
 timeline.push(instructions);
 
-texturePairs = {0:['sand','paper'], 1:['rubber','paper'],2:['rubber','felt'],3:['sand','felt'],
-                    4:['sand','rubber'],5:['felt','paper']};
-concepts = ['lion','badger'];
 
 numReps = 4;
 
@@ -195,11 +202,6 @@ timeline.push({
   }
   )
 
-  var preload = {
-    type: jsPsychPreload,
-    trials: timeline
-  }
-  timeline.push(preload);
 
 
 // timeline.push(expTrials);
