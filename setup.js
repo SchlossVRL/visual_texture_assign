@@ -20,6 +20,11 @@ jsPsych.data.addProperties({
 
 
 var timeline = [];
+var preload = {
+  type: jsPsychPreload,
+  auto_preload: true
+}
+timeline.push(preload);
 
 var consent = {
   type: jsPsychSurveyMultiSelect,
