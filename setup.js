@@ -160,7 +160,7 @@ if(block<numReps-1){
 
 timeline.push({
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: `<p style="font-size:20px">You have completed ${Math.round(((block+1)/numRep)*100)}% of this experiment. Press the spacebar to continue</p>`,
+  stimulus: `<p style="font-size:20px">You have completed ${Math.round(((block+1)/numReps)*100)}% of this experiment. Press the spacebar to continue</p>`,
   choices: [' ']
 })
 
