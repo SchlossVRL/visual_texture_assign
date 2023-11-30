@@ -69,6 +69,23 @@ var consent = {
       ],
   button_label: "Start Experiment",
   };
+// timeline.push(welcome);
+timeline.push(consent);
+
+  var demographics = {
+    type: jsPsychSurveyText,
+    questions: [
+        {prompt: "Age", name: 'Age', rows: "1", columns: "3", required: true,},
+        {prompt: "Gender", name: 'Gender', rows: "1", columns: "15", required: true,},
+        {prompt: "Race/ethnicity", name: 'Race/ethnicity', rows: "1", columns: "30", required: true,},
+        {prompt: "List all languages you know", name: "Languages", rows: "6", columns: "60", required: true,}
+        ],
+    preamble: "Please answer the following questions.",
+    button_label: "Done",
+    randomize_question_order: false
+};
+// timeline.push(welcome);
+timeline.push(demographics);
 
 
 var instructions = {
@@ -78,8 +95,7 @@ var instructions = {
   `,
 };
 
-// timeline.push(welcome);
-timeline.push(consent);
+
 texturePairs = {0:['sand','paper'], 1:['rubber','paper'],2:['rubber','felt'],3:['sand','felt'],
                     4:['sand','rubber'],5:['felt','paper']};
 // concepts = ['lion','badger'];
@@ -144,7 +160,7 @@ if(block<numReps-1){
 
 timeline.push({
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: `<p style="font-size:20px">Ready for the next block? Press the spacebar to continue</p>`,
+  stimulus: `<p style="font-size:20px">You have completed ${Math.round(((block+1)/numRep)*100)}% of this experiment. Press the spacebar to continue</p>`,
   choices: [' ']
 })
 
@@ -207,11 +223,25 @@ timeline.push({
   }
   )
 
+  var debrief = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function(){
+        return `<p>Great job! You have finished the experiment.</p> 
+        <p>The goal of this experiment is to understand how people map different textures to concepts like fruits and animals.</p>
+        <p>You may have been shown different concepts than others who took part in this experiment. <br>\
+        Thank you for participating! You may now close this window.</p>            
+    `},
+    choices: "NO_KEYS",
+    trial_duration: 2000
+}
+
+
 
 
 // timeline.push(expTrials);
-timeline.push(goodbye);
+// timeline.push(goodbye);
 timeline.push(save_data);
+timeline.push(debrief);
 
 jsPsych.run(timeline);
 
