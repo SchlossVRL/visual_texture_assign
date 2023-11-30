@@ -1,8 +1,13 @@
 
 
 /// create a function called setupExperiment() that will be called when the page loads
-function setupExperiment() {
-
+async function setupExperiment() {
+const condition = await jsPsychPipe.getCondition("UFX8BrGX9EDl");
+if (condition==0){
+  concepts = ['bear','fish']
+} else if (condition==1){
+  concepts = ['banana','raspberries']
+}
 
 
 var jsPsych = initJsPsych({
@@ -77,7 +82,7 @@ var instructions = {
 timeline.push(consent);
 texturePairs = {0:['sand','paper'], 1:['rubber','paper'],2:['rubber','felt'],3:['sand','felt'],
                     4:['sand','rubber'],5:['felt','paper']};
-concepts = ['lion','badger'];
+// concepts = ['lion','badger'];
 
 imPaths = []
   for(var i=0;i<Object.keys(texturePairs).length;i++){
@@ -190,7 +195,7 @@ timeline.push({
   const save_data = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "ptwQJLffXvph",
+    experiment_id: "UFX8BrGX9EDl",
     filename: filename,
     data_string: ()=>jsPsych.data.get().csv()
   };
