@@ -101,7 +101,7 @@ var instructions = {
     The bars will have different textures, but will not be labeled.
           
     Above the graph you will see the name of one of the two ${category}s, ${concepts[0]} or ${concepts[1]}.
-    Your task will be to decide which bar corresponds to the fruit described above the graph.
+    Your task will be to decide which bar corresponds to the ${category} described above the graph.
     As mentioned above, the bars will not be labeled,
     so please use your intuition about which bar color corresponds to the ${category} described.
     </p>
