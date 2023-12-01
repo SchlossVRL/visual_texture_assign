@@ -10,6 +10,7 @@ if (condition==0){
   concepts = ['banana','raspberries']
   category = 'fruit'
 }
+jsPsych.data.addProperties({category: category});
 
 
 var jsPsych = initJsPsych({
@@ -174,7 +175,7 @@ pracTrial = {
     concept: practiceConcepts[i],
     ai_trial: true,
     practice: true,
-    texture_pair: [practiceTextures[i][0],practiceTextures[i][1]]
+    texture_pair: `${practiceTextures[i][0]}_${practiceTextures[i][1]}`
   }
 }
 timeline.push(pracTrial);
@@ -208,7 +209,8 @@ for(var i=0;i<Object.keys(texturePairs).length;i++){
       right: texturePairs[i][1],
       concept: concepts[j],
       ai_trial: true,
-      texture_pair: [texturePairs[i][0],texturePairs[i][1]]
+      texture_pair: `${texturePairs[i][0]}_${texturePairs[i][1]}`
+      
     }
   }
   blockTrials.push(assignTrial);
@@ -222,7 +224,7 @@ for(var i=0;i<Object.keys(texturePairs).length;i++){
       right: texturePairs[i][0],
       concept: concepts[j],
       ai_trial: true,
-      texture_pair: [texturePairs[i][0],texturePairs[i][1]]
+      texture_pair: `${texturePairs[i][0]}_${texturePairs[i][1]}`
     }
   }
   blockTrials.push(assignTrial_R);
