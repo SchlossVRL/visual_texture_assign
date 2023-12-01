@@ -96,7 +96,7 @@ var instructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
     <p>During this experiment you will be presented with a series of bar graphs like the one below.
-    Each graph will show a different person's preferences for two fruits, ${concepts[0]} and ${concepts[1]} .
+    Each graph will show a different person's preferences for two ${category}s, ${concepts[0]} and ${concepts[1]} .
     Within each graph, one bar represents ${concepts[0]} and the other bar represents ${concepts[1]}.
     The bars will have different textures, but will not be labeled.
           
