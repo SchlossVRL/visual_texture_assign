@@ -10,7 +10,7 @@ if (condition==0){
   concepts = ['banana','raspberries']
   category = 'fruit'
 }
-jsPsych.data.addProperties({category: category});
+
 
 
 var jsPsych = initJsPsych({
@@ -19,6 +19,7 @@ var jsPsych = initJsPsych({
       }
     }
 );
+jsPsych.data.addProperties({category: category});
 
 const subject_id = jsPsych.randomization.randomID(10);
 const filename = `${subject_id}.csv`;
