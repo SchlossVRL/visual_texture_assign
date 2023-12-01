@@ -5,8 +5,10 @@ async function setupExperiment() {
 const condition = await jsPsychPipe.getCondition("UFX8BrGX9EDl");
 if (condition==0){
   concepts = ['bear','fish']
+  category = 'animal'
 } else if (condition==1){
   concepts = ['banana','raspberries']
+  category = 'fruit'
 }
 
 
@@ -91,9 +93,33 @@ timeline.push(demographics);
 var instructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
-    <p>Instructions Here! Do the thing! Thanks! Now press the spacebar.</p>
+    <p>During this experiment you will be presented with a series of bar graphs like the one below.
+    Each graph will show a different person's preferences for two fruits, ${concepts[0]} and ${concepts[1]} .
+    Within each graph, one bar represents ${concepts[0]} and the other bar represents ${concepts[1]}.
+    The bars will have different textures, but will not be labeled.
+          
+    Above the graph you will see the name of one of the two ${category}s, ${concepts[0]} or ${concepts[1]}.
+    Your task will be to decide which bar corresponds to the fruit described above the graph.
+    As mentioned above, the bars will not be labeled,
+    so please use your intuition about which bar color corresponds to the ${category} described.
+    </p>
+      
+    <p>To respond, please use the following keys:<br>
+    Left bar: <b>Left arrow key</b><br>
+    Right bar: <b>Right arrow key</b><br>
+    Please respond quickly with your first intuition for each trial.</p>
+        
+    <p>The experiment will take about 5 minutes.
+    When ready, please press the SPACEBAR to begin 5 practice trials.</p>
   `,
+  choices: [" "]
 };
+
+
+
+
+
+
 
 
 texturePairs = {0:['sand','paper'], 1:['rubber','paper'],2:['rubber','felt'],3:['sand','felt'],
@@ -113,11 +139,54 @@ imPaths = []
 
 
 
+
+
+// sample 5 random items from texturePairs using jsPsych.randomization.sampleWithoutReplacement
+
+
+// var texturePairs = {0:['sand','paper'], 1:['rubber','paper'],2:['rubber','felt'],3:['sand','felt'],
+//                     4:['sand','rubber'],5:['felt','paper']};
+
+
+
+
 timeline.push({
   type: jsPsychFullscreen,
   fullscreen_mode: true,
 })
 timeline.push(instructions);
+
+
+practiceTextures = jsPsych.randomization.sampleWithReplacement(Object.keys(texturePairs),5);
+practiceConcepts = jsPsych.randomization.sampleWithReplacement(concepts,5);
+
+
+for(i=0;i<5;i++){
+
+pracTrial = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `<p style="font-size:50px">${practiceConcepts[i]}</p><img src="img/${texturePairs[practiceTextures[i]][0]}_${texturePairs[practiceTextures[i]][1]}.png" style="height:350px">`,
+  choices: ['ArrowLeft', 'ArrowRight'],
+  post_trial_gap: 200,
+  data: {
+    left: practiceTextures[i][0],
+    right: practiceTextures[i][1],
+    concept: practiceConcepts[i],
+    ai_trial: true,
+    practice: true,
+    texture_pair: [practiceTextures[i][0],practiceTextures[i][1]]
+  }
+}
+timeline.push(pracTrial);
+}
+
+var postPractice = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `
+    <p>Good job! You've completed the practice trials. When you are ready, press the SPACEBAR to begin the experiment.</p>`,
+  choices: [" "]
+};
+timeline.push(postPractice);
 
 
 numReps = 4;
@@ -137,7 +206,9 @@ for(var i=0;i<Object.keys(texturePairs).length;i++){
     data: {
       left: texturePairs[i][0],
       right: texturePairs[i][1],
-      concept: concepts[j]
+      concept: concepts[j],
+      ai_trial: true,
+      texture_pair: [texturePairs[i][0],texturePairs[i][1]]
     }
   }
   blockTrials.push(assignTrial);
@@ -149,7 +220,9 @@ for(var i=0;i<Object.keys(texturePairs).length;i++){
     data: {
       left: texturePairs[i][1],
       right: texturePairs[i][0],
-      concept: concepts[j]
+      concept: concepts[j],
+      ai_trial: true,
+      texture_pair: [texturePairs[i][0],texturePairs[i][1]]
     }
   }
   blockTrials.push(assignTrial_R);
@@ -168,15 +241,6 @@ timeline.push({
 
 }
 
-
-
-  var goodbye = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
-      <p>Great job! You've completed all the trials!</p>
-    `,
-    post_trial_gap: 2000
-  };
 
   var fixation = {
     type: jsPsychHtmlKeyboardResponse,
