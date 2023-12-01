@@ -54,7 +54,7 @@ var consent = {
       "  <br><br><strong><u>ARE THERE ANY BENEFITS TO ME?</u></strong>" +
       "  <br>We don't expect any direct benefits to you from participation in this study." +
       "  <br><br><strong><u>WILL I BE COMPENSATED FOR MY PARTICIPATION?</u></strong>" +
-      "  <br>The amount of compensation depends on the length of the task, based on a rate of $7.25 per hour. The compensation amount for this HIT, as specified in the HIT description, was pre-determined based on the amount of time it took previous participants to do similar tasks."+
+      "  <br>The amount of compensation depends on the length of the task, based on a rate of $10.00 per hour. The compensation amount for this HIT, as specified in the HIT description, was pre-determined based on the amount of time it took previous participants to do similar tasks."+
       "  <br><br>If you do withdraw prior to the end of the study, you will receive no compensation." +
       "  <br><br><strong><u>HOW WILL MY CONFIDENTIALITY BE PROTECTED?</u></strong>" +
       "  <br>Participant information will remain confidential. Neither your name or any other identifiable information will be recorded. Typically, group characteristics will be published, but datasets with individual responses may also be shared. In such cases, the data will not be linked to your name or other identifiable information." +
