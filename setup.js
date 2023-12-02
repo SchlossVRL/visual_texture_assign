@@ -2,13 +2,21 @@
 
 /// create a function called setupExperiment() that will be called when the page loads
 async function setupExperiment() {
-const condition = await jsPsychPipe.getCondition("UFX8BrGX9EDl");
+const condition = await jsPsychPipe.getCondition("JExCejfErJz0");
+// if (condition==0){
+//   concepts = ['bear','fish']
+//   category = 'animal'
+// } else if (condition==1){
+//   concepts = ['banana','raspberries']
+//   category = 'fruit'
+// }
+
 if (condition==0){
-  concepts = ['bear','fish']
-  category = 'animal'
+  concepts = ['tree foliage','glacial ice']
+  category = 'natural resource'
 } else if (condition==1){
-  concepts = ['banana','raspberries']
-  category = 'fruit'
+  concepts = ['pineapple','eggplant']
+  category = 'produce'
 }
 
 
@@ -96,11 +104,11 @@ var instructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
     <p>During this experiment you will be presented with a series of bar graphs.
-    Each graph will show a different person's preferences for two ${category}s, ${concepts[0]} and ${concepts[1]} .
+    Each graph will show a different person's preferences for two kinds of ${category}, ${concepts[0]} and ${concepts[1]} .
     Within each graph, one bar represents ${concepts[0]} and the other bar represents ${concepts[1]}.
     The bars will have different textures, but will not be labeled.
           
-    Above the graph you will see the name of one of the two ${category}s, ${concepts[0]} or ${concepts[1]}.
+    Above the graph you will see the name of one of the two kinds of ${category}, ${concepts[0]} or ${concepts[1]}.
     Your task will be to decide which bar corresponds to the ${category} described above the graph.
     As mentioned above, the bars will not be labeled,
     so please use your intuition about which bar color corresponds to the ${category} described.
@@ -278,7 +286,7 @@ timeline.push({
   const save_data = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "UFX8BrGX9EDl",
+    experiment_id: "JExCejfErJz0",
     filename: filename,
     data_string: ()=>jsPsych.data.get().csv()
   };
